@@ -1,0 +1,191 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "AppController_healthCheckRoot",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "App"
+        ]
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "AppController_healthCheck",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "App"
+        ]
+      }
+    },
+    "/device": {
+      "post": {
+        "operationId": "DeviceController_addDevice",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddDevice"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful"
+          }
+        },
+        "tags": [
+          "device"
+        ]
+      },
+      "get": {
+        "operationId": "DeviceController_getDevices",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          }
+        },
+        "tags": [
+          "device"
+        ]
+      }
+    },
+    "/weather": {
+      "post": {
+        "operationId": "WeatherController_addDevice",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddLogDevice"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful"
+          }
+        },
+        "tags": [
+          "weather"
+        ]
+      }
+    },
+    "/weather/history-devices": {
+      "get": {
+        "operationId": "WeatherController_historyDevices",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          }
+        },
+        "tags": [
+          "weather"
+        ]
+      }
+    },
+    "/weather/history-device-by-id/{id}": {
+      "get": {
+        "operationId": "WeatherController_historyDeviceById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          }
+        },
+        "tags": [
+          "weather"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Weather Stations APIs",
+    "description": "Weather Stations APIs",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "JWT": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Bearer *schedule*",
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    },
+    "schemas": {
+      "AddDevice": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Device 1"
+          },
+          "description": {
+            "type": "string",
+            "example": "IOT 1"
+          }
+        },
+        "required": [
+          "name",
+          "description"
+        ]
+      },
+      "AddLogDevice": {
+        "type": "object",
+        "properties": {
+          "deviceId": {
+            "type": "number",
+            "example": 1
+          },
+          "temperature": {
+            "type": "number",
+            "example": 30
+          }
+        },
+        "required": [
+          "deviceId",
+          "temperature"
+        ]
+      }
+    }
+  },
+  "security": [
+    {
+      "JWT": []
+    }
+  ]
+}
